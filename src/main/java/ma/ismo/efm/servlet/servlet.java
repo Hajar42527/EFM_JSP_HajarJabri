@@ -28,14 +28,23 @@ public class servlet extends HttpServlet {
 		switch (request.getPathInfo()) {
 		case "/All":
 			request.setAttribute("etablissement", dao.getAll());
-			request.getRequestDispatcher("/pages/tableEtab.jsp").forward(request, response);
+			request.getRequestDispatcher("/pages/tableEtablissement.jsp").forward(request, response);
 			break;
 		case "/goAdd":
-			request.getRequestDispatcher("/pages/AddEtab.jsp").forward(request, response);
+			request.getRequestDispatcher("/pages/AddEtablissement.jsp").forward(request, response);
 			break;
-		case "/etab/add":
-			request.setAttribute("etablissement", dao.getAll());
-			request.getRequestDispatcher("/pages/tableEtab.jsp").forward(request, response);
+		case "/add":
+			Etablissement etabAdd = new Etablissement();
+			etabAdd.setNom_Etab(request.getParameter("nom"));
+			etabAdd.setAdresse_etab(request.getParameter("adress"));
+			etabAdd.setTel_etab(request.getParameter("tele"));
+			request.setAttribute("added", dao.save(etabAdd)==true? "added":"echec");
+			request.getRequestDispatcher("/index.jsp").forward(request, response);
+			break;
+		case "/delete":
+			Etablissement etabDelete = dao.getOne(Integer.valueOf(request.getParameter("id")));
+			request.setAttribute("deleted", dao.delete(etabDelete)==true? "delete":"echec");
+			request.getRequestDispatcher("/index.jsp").forward(request, response);
 			break;
 		default:
 			break;

@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class Etablissement {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private int code_etab;
 	
@@ -56,8 +56,7 @@ public class Etablissement {
 	public Etablissement() {
 	}
 
-	public Etablissement(int code_etab, String nom_Etab, String adresse_etab, String tel_etab) {
-		this.code_etab = code_etab;
+	public Etablissement(String nom_Etab, String adresse_etab, String tel_etab) {
 		Nom_Etab = nom_Etab;
 		Adresse_etab = adresse_etab;
 		Tel_etab = tel_etab;

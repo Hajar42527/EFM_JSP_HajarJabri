@@ -6,7 +6,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.ismo.crjj.efm.beans.Etablissement;
-
 import ma.ismo.crjj.util.HibernateUtil;
 
 
@@ -42,12 +41,9 @@ public class daoEtablissement implements IDao<Etablissement> {
 		try {
 			Session s = HibernateUtil.getSessionfactory().getCurrentSession();
 			Transaction t = s.beginTransaction();
-			
 			s.save(obj);
-			
 			t.commit();
 			s.close();
-			
 			return true;
 		} catch (Exception ex) {
 			System.out.println("Error " + ex.getMessage());
